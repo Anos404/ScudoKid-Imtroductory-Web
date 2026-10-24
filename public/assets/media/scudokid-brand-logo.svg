@@ -1,0 +1,42 @@
+<svg width="420" height="110" viewBox="0 0 420 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D8B8B" />
+      <stop offset="50%" stop-color="#206E6E" />
+      <stop offset="100%" stop-color="#1A4F4F" />
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#F0FDF4" />
+    </linearGradient>
+  </defs>
+
+  <!-- Logo Emblem: Shield + Family Arms + Child Heart -->
+  <g transform="translate(10, 10)">
+    <!-- Outer Shield Crest -->
+    <path d="M45 4 L78 16 C78 52 45 78 45 84 C45 78 12 52 12 16 L45 4 Z" fill="url(#shieldGrad)" stroke="#34D399" stroke-width="3" stroke-linejoin="round" />
+    
+    <!-- Inner Shield Glow -->
+    <path d="M45 12 L70 21 C70 50 45 70 45 74 C45 70 20 50 20 21 L45 12 Z" fill="#ffffff" fill-opacity="0.12" />
+
+    <!-- Protective Parent Hug Curves -->
+    <path d="M22 34 C25 24 35 22 45 22 C55 22 65 24 68 34" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none" />
+    <circle cx="30" cy="20" r="4.5" fill="#ffffff" />
+    <circle cx="60" cy="20" r="4.5" fill="#ffffff" />
+
+    <!-- Joyful Protected Child in Center -->
+    <circle cx="45" cy="38" r="6" fill="#FBBF24" />
+    <!-- Arms raised in joy -->
+    <path d="M35 46 L45 52 L55 46 M45 52 L45 64 M37 72 L45 64 L53 72" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  </g>
+
+  <!-- Wordmark -->
+  <text x="110" y="66" font-family="'Host Grotesk', 'Inter', -apple-system, sans-serif" font-size="44" font-weight="800" letter-spacing="-0.03em" fill="url(#textGrad)">
+    Scudo<tspan fill="#34D399">Kid</tspan>
+  </text>
+
+  <!-- Tagline underneath -->
+  <text x="112" y="86" font-family="'Inter', sans-serif" font-size="12" font-weight="600" letter-spacing="0.12em" fill="#8FCBC7">
+    AI CHILD SAFETY ECOSYSTEM
+  </text>
+</svg>

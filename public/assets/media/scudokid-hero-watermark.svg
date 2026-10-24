@@ -1,0 +1,26 @@
+<svg width="1752" height="349" viewBox="0 0 1752 349" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="scudoWatermarkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2D8B8B" stop-opacity="0.18" />
+      <stop offset="50%" stop-color="#34D399" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#206E6E" stop-opacity="0.18" />
+    </linearGradient>
+    <filter id="subtleGlow" x="-5%" y="-10%" width="110%" height="130%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <text
+    x="50%"
+    y="265"
+    text-anchor="middle"
+    font-family="'Host Grotesk', 'Inter', -apple-system, sans-serif"
+    font-size="285"
+    font-weight="900"
+    letter-spacing="-0.035em"
+    fill="url(#scudoWatermarkGrad)"
+    filter="url(#subtleGlow)"
+  >
+    SCUDOKID
+  </text>
+</svg>
