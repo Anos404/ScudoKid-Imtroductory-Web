@@ -70,11 +70,11 @@ const HoverText = React.forwardRef<HTMLAnchorElement, HoverTextProps>(function H
       className={`inline-flex items-center cursor-pointer gap-2 no-underline transition-colors duration-500 ease-[cubic-bezier(0.625,0.05,0,1)] motion-reduce:transition-none ${containerClassName}`}
       {...rest}
     >
-      <div className="relative">
-        <span className="inline-block relative w-fit">
+      <div className="relative overflow-hidden">
+        <span className="inline-block relative w-fit whitespace-nowrap">
           <span
             data-text={text}
-            className={`overflow-hidden relative inline-block leading-[1.2] ${className}`}
+            className={`overflow-hidden relative inline-block leading-[1.25] h-[1.25em] whitespace-nowrap ${className}`}
           >
             {text.split("").map((char, index) => (
               <span
@@ -88,7 +88,7 @@ const HoverText = React.forwardRef<HTMLAnchorElement, HoverTextProps>(function H
                     : "translateY(0em) rotate(0.001deg)",
                   transition: "transform 0.6s cubic-bezier(0.625, 0.05, 0, 1)",
                   transitionDelay: `${index * 0.006}s`,
-                  whiteSpace: char === " " ? "pre" : "normal",
+                  whiteSpace: "pre",
                   willChange: "transform",
                 }}
               >

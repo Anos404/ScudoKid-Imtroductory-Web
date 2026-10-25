@@ -37,14 +37,8 @@ export default function IntroOverlay() {
       id="intro-overlay"
       data-intro-overlay="true"
       aria-hidden="true"
+      className="fixed inset-0 w-full h-[100svh] z-[9999] pointer-events-none bg-white dark:bg-[#070F0F] transition-colors duration-300"
       style={{
-        position: "fixed",
-        inset: 0,
-        width: "100%",
-        height: "100svh",
-        backgroundColor: "#ffffff",
-        zIndex: 9999,
-        pointerEvents: "none",
         opacity: 1,
       }}
     />

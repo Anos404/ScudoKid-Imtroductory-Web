@@ -122,11 +122,11 @@ export default function Faq() {
   };
 
   return (
-    <section id="faq" className="kyntra-container relative w-full bg-white text-black">
+    <section id="faq" className="kyntra-container relative w-full bg-white dark:bg-[#070F0F] text-black dark:text-white transition-colors duration-500">
       <div className="mx-auto max-w-400">
         <h2
           ref={headingRef}
-          className="font-heading mb-[4vw] leading-[1.15] font-normal tracking-[-0.02em] max-[1025px]:mb-[8vw] max-[1025px]:text-[6vw] max-md:text-[8vw] opacity-0"
+          className="font-heading mb-[4vw] leading-[1.15] font-normal tracking-[-0.02em] max-[1025px]:mb-[8vw] max-[1025px]:text-[6vw] max-md:text-[8vw] text-black dark:text-white opacity-0"
         >
           Frequently Asked Questions
         </h2>
@@ -165,7 +165,7 @@ export default function Faq() {
               {/* Separator line */}
               <div
                 data-line-draw="true"
-                className={`absolute right-[1.3vw] bottom-0 left-[1.3vw] z-2 h-px bg-black transition-opacity duration-300 max-md:right-0 max-md:left-0 ${
+                className={`absolute right-[1.3vw] bottom-0 left-[1.3vw] z-2 h-px bg-black dark:bg-white/15 transition-opacity duration-300 max-md:right-0 max-md:left-0 ${
                   isOpen ? "opacity-0" : "opacity-100"
                 }`}
               />
@@ -173,7 +173,7 @@ export default function Faq() {
               {/* Question Row */}
               <div
                 className={`flex w-full items-center justify-between gap-6 relative z-2 font-heading font-normal transition-colors duration-500 ease-[cubic-bezier(0.215,0.61,0.355,1)] gap-[2vw] pl-6 text-[1.65vw] max-[1025px]:text-[5vw] max-md:text-[6vw]! py-[1.6vw] pr-[1.4vw] text-left max-md:py-[5vw] max-md:pr-[5vw] max-md:pl-[5vw] max-[1025px]:py-[3vw] max-[1025px]:pr-[3vw] max-[1025px]:pl-[3vw] ${
-                  isOpen ? "text-white" : "text-black"
+                  isOpen ? "text-white" : "text-black dark:text-white"
                 }`}
               >
                 <div className="flex-1">

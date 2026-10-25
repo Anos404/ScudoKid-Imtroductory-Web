@@ -101,19 +101,19 @@ export default function About() {
     <section
       id="ecosystem"
       ref={sectionRef}
-      className="kyntra-container relative w-full h-full overflow-hidden bg-white text-black"
+      className="kyntra-container relative w-full h-full overflow-hidden bg-white dark:bg-[#070F0F] text-black dark:text-white transition-colors duration-500"
     >
       <div className="mx-auto flex max-w-400 py-[4vh] items-start justify-between gap-[6vw] max-[1025px]:flex-col max-[1025px]:gap-[6vw]">
         <h2
           ref={headingRef}
-          className="font-heading w-[38vw] max-[1025px]:w-full leading-[1.15] font-normal tracking-[-0.02em] opacity-0"
+          className="font-heading w-[38vw] max-[1025px]:w-full leading-[1.15] font-normal tracking-[-0.02em] text-black dark:text-white opacity-0"
         >
           Three Unified Platforms. One Comprehensive Safety Ecosystem.
         </h2>
 
         <p
           ref={paragraphRef}
-          className="text-24 w-[33vw] max-[1025px]:w-full leading-[1.6] tracking-wide text-black/80 text-right max-[1025px]:text-left opacity-0"
+          className="text-24 w-[33vw] max-[1025px]:w-full leading-[1.6] tracking-wide text-black/80 dark:text-slate-300 text-right max-[1025px]:text-left opacity-0"
         >
           ScudoKid seamlessly synchronizes the Parent Web Portal, Child Mobile App, and Super Admin Panel—empowering families with proactive AI telemetry, real-time geofencing, and healthy habit reinforcement.
         </p>

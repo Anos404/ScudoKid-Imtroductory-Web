@@ -114,7 +114,7 @@ export default function HowItWorks() {
       const title = b.querySelector(".step-title");
       const cfg = { trigger: b, start: "top 65%", end: "top 45%", scrub: 0.2 };
       gsap.fromTo(b, { opacity: 0.3 }, { opacity: 1, ease: "power2.out", scrollTrigger: cfg });
-      if (title) gsap.fromTo(title, { color: "#000000" }, { color: accent, ease: "none", scrollTrigger: cfg });
+      if (title) gsap.fromTo(title, { color: "currentColor" }, { color: accent, ease: "none", scrollTrigger: cfg });
     });
 
     return () => {
@@ -126,19 +126,19 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       ref={sectionRef}
-      className="kyntra-container relative w-full bg-white text-black"
+      className="kyntra-container relative w-full bg-white dark:bg-[#070F0F] text-black dark:text-white transition-colors duration-500"
     >
       <div className="mx-auto flex max-w-400 flex-col gap-[2vw] max-[1025px]:gap-[8vw] text-center">
         <h2
           ref={headingRef}
-          className="font-heading leading-[1.15] font-normal tracking-[-0.02em] max-[1025px]:text-[6vw] max-md:text-[8vw] opacity-0"
+          className="font-heading leading-[1.15] font-normal tracking-[-0.02em] max-[1025px]:text-[6vw] max-md:text-[8vw] text-black dark:text-white opacity-0"
         >
           How ScudoKid Works
         </h2>
 
         <p
           ref={paragraphRef}
-          className="text-24 mx-auto tracking-wide w-[60vw] leading-[1.6] text-black max-[1025px]:max-w-full max-[1025px]:w-full opacity-0"
+          className="text-24 mx-auto tracking-wide w-[60vw] leading-[1.6] text-black/80 dark:text-slate-300 max-[1025px]:max-w-full max-[1025px]:w-full opacity-0"
         >
           ScudoKid makes child protection proactive and seamless in four simple steps—from rapid device pairing to positive reinforcement and fatigue-free alerts.
         </p>
@@ -154,16 +154,16 @@ export default function HowItWorks() {
             className="flex mb-[2vw] w-full flex-col items-center"
           >
             <svg width="20" height="150" className="overflow-visible">
-              <line x1="10" y1="0" x2="10" y2="150" stroke="#D1D5DB" strokeWidth="1" />
+              <line x1="10" y1="0" x2="10" y2="150" stroke="#D1D5DB" className="dark:stroke-white/20" strokeWidth="1" />
               <line x1="10" y1="0" x2="10" y2="150" stroke="#2D8B8B" strokeWidth="1" />
-              <circle cx="10" cy="0" r="6" fill="#f8f8f8" stroke="#2D8B8B" strokeWidth="1" />
+              <circle cx="10" cy="0" r="6" fill="#f8f8f8" className="dark:fill-[#070F0F]" stroke="#2D8B8B" strokeWidth="1" />
             </svg>
 
             <div className="step-block mt-[2vw] mb-[1vw] max-[1025px]:mt-[6vw] max-[1025px]:mb-[4vw] space-y-[1vw] text-center max-[1025px]:space-y-[1vh]">
-              <h3 className="step-title font-heading text-[1.65vw] font-normal max-md:text-[6vw]">
+              <h3 className="step-title font-heading text-[1.65vw] font-normal max-md:text-[6vw] text-black dark:text-white">
                 {step.title}
               </h3>
-              <p className="text-22 text-[#333333]">{step.description}</p>
+              <p className="text-22 text-[#333333] dark:text-slate-300">{step.description}</p>
             </div>
           </div>
         ))}

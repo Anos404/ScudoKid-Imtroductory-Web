@@ -66,63 +66,75 @@ export default function Smarter() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const paragraphRef = useRef<HTMLParagraphElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const parentRef = useRef<HTMLDivElement>(null);
+  const pinWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Heading & paragraph fades
-    [headingRef.current, paragraphRef.current].forEach((el) => {
-      if (!el) return;
-      gsap.fromTo(
-        el,
-        { opacity: 0, y: isReduced ? 0 : 24 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            once: true,
-          },
-        }
-      );
-    });
+    const ctx = gsap.context(() => {
+      // Heading & paragraph fades
+      [headingRef.current, paragraphRef.current].forEach((el) => {
+        if (!el) return;
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: isReduced ? 0 : 24 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+              once: true,
+            },
+          }
+        );
+      });
 
-    const track = trackRef.current;
-    const parent = parentRef.current;
-    if (!track || !parent) return;
+      const track = trackRef.current;
+      const pinWrapper = pinWrapperRef.current;
+      if (!track || !pinWrapper) return;
 
-    if (isReduced) {
+      if (isReduced) {
+        gsap.set(track, { x: 0, xPercent: 0 });
+        return;
+      }
+
+      // Initial position
       gsap.set(track, { x: 0, xPercent: 0 });
-      return;
-    }
 
-    // Initial position: track starts cleanly at x: 0
-    gsap.set(track, { x: 0, xPercent: 0 });
+      const getScrollDistance = () => {
+        const paddingRight = window.innerWidth * 0.06;
+        return Math.max(0, track.scrollWidth - window.innerWidth + paddingRight);
+      };
 
-    const getScrollDistance = () => {
-      const p = track.parentElement;
-      return p ? Math.max(0, track.scrollWidth - p.clientWidth + 40) : 0;
-    };
+      const tween = gsap.to(track, {
+        x: () => -getScrollDistance(),
+        ease: "none",
+      });
 
-    const st = gsap.to(track, {
-      x: () => -getScrollDistance(),
-      ease: "none",
-      scrollTrigger: {
-        trigger: parent,
+      ScrollTrigger.create({
+        trigger: pinWrapper,
         start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
+        end: () => `+=${Math.max(window.innerHeight * 1.5, getScrollDistance() + 250)}`,
+        pin: true,
+        pinSpacing: true,
+        scrub: 0.3,
+        animation: tween,
         invalidateOnRefresh: true,
-      },
-    });
+      });
+
+      const refreshTimeout = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 150);
+
+      return () => clearTimeout(refreshTimeout);
+    }, sectionRef);
 
     return () => {
-      st.kill();
+      ctx.revert();
     };
   }, []);
 
@@ -160,91 +172,92 @@ export default function Smarter() {
     <section
       id="smarter"
       ref={sectionRef}
-      className="relative z-10 w-full bg-white"
+      className="relative z-10 w-full bg-white dark:bg-[#070F0F] transition-colors duration-500"
     >
-      <div ref={parentRef} className="relative h-[250vh] max-[1025px]:h-[220vh] max-md:h-[190vh]">
-        <div className="flex h-screen w-full flex-col justify-start pt-[6vh] max-md:pt-[4vh] gap-[2.5vw] max-[1025px]:gap-[4vw] max-md:gap-5 sticky top-0 overflow-hidden">
-          <div className="mx-auto flex w-full max-w-400 shrink-0 flex-col gap-[1.5vw] px-[5%] max-[1025px]:px-[7%] max-md:gap-4">
-            <h2
-              ref={headingRef}
-              className="font-heading w-[65%] max-[1025px]:w-full leading-[1.1] font-normal tracking-[-0.02em] whitespace-pre-line text-black opacity-0"
-            >
-              Every Signal Makes the ScudoKid AI Engine Smarter
-            </h2>
-
-            <div className="flex items-center justify-between gap-[4vw] max-[1025px]:flex-col max-[1025px]:items-start max-[1025px]:gap-6">
-              <p
-                ref={paragraphRef}
-                className="text-24 max-w-[42vw] leading-normal text-black max-[1025px]:max-w-full max-[1025px]:text-[2.6vw] max-md:text-[4vw] opacity-0"
-              >
-                Raw telemetry transforms into actionable parental protection through four interconnected machine learning and rule-based analytical pipelines.
-              </p>
-            </div>
-          </div>
-
-          {/* Horizontal scroll track with spotlight cards */}
-          <div
-            ref={trackRef}
-            className="flex w-max shrink-0 gap-[1.9vw] px-[5%] max-[1025px]:gap-[4.4vw] max-[1025px]:px-[7%] max-md:gap-[7vw] max-md:px-[9%] will-change-transform"
+      <div
+        ref={pinWrapperRef}
+        className="flex h-screen w-full flex-col justify-start pt-[6vh] max-md:pt-[4vh] gap-[2.5vw] max-[1025px]:gap-[4vw] max-md:gap-5 overflow-hidden motion-reduce:h-fit motion-reduce:overflow-visible"
+      >
+        <div className="mx-auto flex w-full max-w-400 shrink-0 flex-col gap-[1.5vw] px-[5%] max-[1025px]:px-[7%] max-md:gap-4">
+          <h2
+            ref={headingRef}
+            className="font-heading w-[65%] max-[1025px]:w-full leading-[1.1] font-normal tracking-[-0.02em] whitespace-pre-line text-black dark:text-white opacity-0"
           >
-            {SMARTER_CARDS.map((card) => (
-              <div
-                key={card.id}
-                onMouseMove={handleCardMouseMove}
-                onMouseEnter={handleCardMouseEnter}
-                onMouseLeave={handleCardMouseLeave}
+            Every Signal Makes the ScudoKid AI Engine Smarter
+          </h2>
+
+          <div className="flex items-center justify-between gap-[4vw] max-[1025px]:flex-col max-[1025px]:items-start max-[1025px]:gap-6">
+            <p
+              ref={paragraphRef}
+              className="text-24 max-w-[42vw] leading-normal text-black/80 dark:text-slate-300 max-[1025px]:max-w-full max-[1025px]:text-[2.6vw] max-md:text-[4vw] opacity-0"
+            >
+              Raw telemetry transforms into actionable parental protection through four interconnected machine learning and rule-based analytical pipelines.
+            </p>
+          </div>
+        </div>
+
+        {/* Horizontal scroll track with spotlight cards */}
+        <div
+          ref={trackRef}
+          className="flex w-max shrink-0 gap-[1.9vw] px-[5%] max-[1025px]:gap-[4.4vw] max-[1025px]:px-[7%] max-md:gap-[7vw] max-md:px-[9%] will-change-transform motion-reduce:overflow-x-auto motion-reduce:w-full motion-reduce:pb-4"
+        >
+          {SMARTER_CARDS.map((card) => (
+            <div
+              key={card.id}
+              onMouseMove={handleCardMouseMove}
+              onMouseEnter={handleCardMouseEnter}
+              onMouseLeave={handleCardMouseLeave}
+              style={{
+                backgroundColor: card.bg,
+                border: card.border || "none",
+                color: card.textColor || "#ffffff",
+              }}
+              className="relative flex aspect-440/477 max-[1025px]:aspect-auto max-[1025px]:h-[45vh] max-md:h-[100vw] w-[28vw] shrink-0 flex-col overflow-hidden rounded-xl p-[2vw] max-[1025px]:p-[4vw] select-none will-change-transform max-[1025px]:w-[50vw] max-md:w-[76vw] max-md:rounded-3xl max-md:p-6 cursor-pointer"
+            >
+              {/* Spotlight texture */}
+              <img
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                width={1024}
+                height={1536}
+                decoding="async"
+                className="smarter-card-texture pointer-events-none absolute inset-0 h-full w-full object-cover opacity-0 mix-blend-screen will-change-[opacity,mask-position]"
                 style={{
-                  backgroundColor: card.bg,
-                  border: card.border || "none",
-                  color: card.textColor || "#ffffff",
+                  color: "transparent",
+                  maskImage:
+                    "radial-gradient(circle 170px at var(--tx, 0px) var(--ty, 0px), #000 55%, transparent 100%)",
+                  WebkitMaskImage:
+                    "radial-gradient(circle 170px at var(--tx, 0px) var(--ty, 0px), #000 55%, transparent 100%)",
                 }}
-                className="relative flex aspect-440/477 max-[1025px]:aspect-auto max-[1025px]:h-[45vh] max-md:h-[100vw] w-[28vw] shrink-0 flex-col overflow-hidden rounded-xl p-[2vw] max-[1025px]:p-[4vw] select-none will-change-transform max-[1025px]:w-[50vw] max-md:w-[76vw] max-md:rounded-3xl max-md:p-6 cursor-pointer"
-              >
-                {/* Spotlight texture */}
+                src="/assets/media/card-texture.2ehejv0p_86-0.webp"
+              />
+
+              <div className="relative z-10 flex h-[45%] max-[1025px]:h-[40%] shrink-0 items-start">
                 <img
                   alt=""
                   aria-hidden="true"
                   loading="lazy"
-                  width={1024}
-                  height={1536}
+                  width={70}
+                  height={70}
                   decoding="async"
-                  className="smarter-card-texture pointer-events-none absolute inset-0 h-full w-full object-cover opacity-0 mix-blend-screen will-change-[opacity,mask-position]"
-                  style={{
-                    color: "transparent",
-                    maskImage:
-                      "radial-gradient(circle 170px at var(--tx, 0px) var(--ty, 0px), #000 55%, transparent 100%)",
-                    WebkitMaskImage:
-                      "radial-gradient(circle 170px at var(--tx, 0px) var(--ty, 0px), #000 55%, transparent 100%)",
-                  }}
-                  src="/assets/media/card-texture.2ehejv0p_86-0.webp"
+                  className="h-[3vw] w-[3vw] object-contain max-[1025px]:h-[5.5vw] max-[1025px]:w-[5.5vw] max-md:h-[12vw] max-md:w-[12vw]"
+                  style={{ color: "transparent" }}
+                  src={card.icon}
                 />
-
-                <div className="relative z-10 flex h-[45%] max-[1025px]:h-[40%] shrink-0 items-start">
-                  <img
-                    alt=""
-                    aria-hidden="true"
-                    loading="lazy"
-                    width={70}
-                    height={70}
-                    decoding="async"
-                    className="h-[3vw] w-[3vw] object-contain max-[1025px]:h-[5.5vw] max-[1025px]:w-[5.5vw] max-md:h-[12vw] max-md:w-[12vw]"
-                    style={{ color: "transparent" }}
-                    src={card.icon}
-                  />
-                </div>
-
-                <div className="relative z-10 flex flex-1 flex-col gap-[1.8vw] max-md:gap-6">
-                  <h3 className="font-heading text-44 leading-[1.15] font-normal tracking-tight whitespace-pre-line text-white max-[1025px]:text-[4vw] max-md:text-[7vw]">
-                    {card.title}
-                  </h3>
-
-                  <p className="max-w-[96%] text-22 tracking-wide leading-[1.3] font-normal text-white max-[1025px]:text-[2.5vw] max-md:text-[3.6vw]">
-                    {card.description}
-                  </p>
-                </div>
               </div>
-            ))}
-          </div>
+
+              <div className="relative z-10 flex flex-1 flex-col gap-[1.8vw] max-md:gap-6">
+                <h3 className="font-heading text-44 leading-[1.15] font-normal tracking-tight whitespace-pre-line text-white max-[1025px]:text-[4vw] max-md:text-[7vw]">
+                  {card.title}
+                </h3>
+
+                <p className="max-w-[96%] text-22 tracking-wide leading-[1.3] font-normal text-white max-[1025px]:text-[2.5vw] max-md:text-[3.6vw]">
+                  {card.description}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

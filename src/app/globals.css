@@ -137,6 +137,22 @@
   color: #fff;
 }
 
+html.dark ::selection,
+html.dark .kyntra-page ::selection {
+  background-color: #34D399;
+  color: #070F0F;
+}
+
+html {
+  color-scheme: light;
+  background-color: #ffffff;
+}
+
+html.dark {
+  color-scheme: dark;
+  background-color: #070F0F;
+}
+
 html,
 body,
 * {
@@ -266,3 +282,17 @@ html.lenis body {
 .tf-char {
   will-change: color, opacity;
 }
+
+/* Hide Next.js dev tools floating badge / N icon watermark */
+nextjs-portal,
+#__next-build-watcher,
+[data-nextjs-dev-tools-button],
+[data-nextjs-toast],
+[data-nextjs-badge],
+div:has(> [data-nextjs-toast]) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+

@@ -140,19 +140,16 @@ export default function StoreButton({
     );
   };
 
+  const colorClasses = isPrimary
+    ? "bg-[#2D8B8B] hover:bg-[#206E6E] border-[#2D8B8B] text-white"
+    : "bg-white dark:bg-[#0D1A1A] border-[#DCE6E4] dark:border-emerald-500/25 text-[#16212E] dark:text-white hover:bg-gray-50 dark:hover:bg-[#122323]";
+
   return (
     <a
       aria-label={`${getMainText()} - ${getSubtext()}`}
       href={href}
       onClick={onClick}
-      style={{
-        backgroundColor: defaultBg,
-        borderColor: defaultBorder,
-        color: defaultText,
-        transform: `scale(${scale})`,
-        transformOrigin: "left",
-      }}
-      className={`group flex items-center gap-3.5 rounded-full border px-5 py-3 transition-all duration-300 shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] w-auto shrink-0 select-none cursor-pointer ${className}`}
+      className={`group flex items-center gap-3.5 rounded-full border px-5 py-3 transition-all duration-300 shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] w-auto shrink-0 select-none cursor-pointer ${colorClasses} ${className}`}
     >
       <div className="flex shrink-0 items-center justify-center">
         {renderIcon()}

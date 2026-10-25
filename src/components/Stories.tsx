@@ -146,19 +146,19 @@ export default function Stories() {
   return (
     <section
       id="stories"
-      className="relative w-full overflow-hidden bg-white py-[7%] text-black max-[1025px]:py-[20%]"
+      className="relative w-full overflow-hidden bg-white dark:bg-[#070F0F] py-[7%] text-black dark:text-white max-[1025px]:py-[20%] transition-colors duration-500"
     >
       <div className="pl-[5%] max-[1025px]:px-[7%]">
         <h2
           ref={headingRef}
-          className="font-heading w-[48vw] text-[3.8vw] leading-[1.1] font-normal tracking-[-0.02em] max-[1025px]:w-[82%] max-[1025px]:text-[6vw] max-md:text-[9vw] opacity-0"
+          className="font-heading w-[48vw] text-[3.8vw] leading-[1.1] font-normal tracking-[-0.02em] max-[1025px]:w-[82%] max-[1025px]:text-[6vw] max-md:text-[9vw] text-black dark:text-white opacity-0"
         >
           Real Families. Proven Digital Wellness.
         </h2>
 
         <p
           ref={paragraphRef}
-          className="text-24 mt-[1.6vw] max-w-[42vw] tracking-wide leading-[1.6] text-black max-[1025px]:mt-[6vw] max-[1025px]:max-w-full max-[1025px]:text-[2.6vw] max-md:text-[4vw] opacity-0"
+          className="text-24 mt-[1.6vw] max-w-[42vw] tracking-wide leading-[1.6] text-black/80 dark:text-slate-300 max-[1025px]:mt-[6vw] max-[1025px]:max-w-full max-[1025px]:text-[2.6vw] max-md:text-[4vw] opacity-0"
         >
           Discover how ScudoKid&apos;s proactive AI models and trust-first safety architecture empower parents and children every day.
         </p>
@@ -168,7 +168,7 @@ export default function Stories() {
         {/* Main testimonial card */}
         <div
           ref={cardRef}
-          className="border-[#2D8B8B] relative min-h-[23.5vw] overflow-hidden rounded-[1.6vw] border px-[3vw] py-[3.2vw] max-[1025px]:min-h-0 max-md:rounded-[5vw] max-md:p-[7vw] opacity-0"
+          className="border-[#2D8B8B] dark:border-emerald-500/30 bg-white dark:bg-[#0D1818] shadow-xl dark:shadow-[0_15px_35px_rgba(0,0,0,0.6)] relative min-h-[23.5vw] overflow-hidden rounded-[1.6vw] border px-[3vw] py-[3.2vw] max-[1025px]:min-h-0 max-md:rounded-[5vw] max-md:p-[7vw] opacity-0 transition-colors duration-500"
         >
           <div className="flex items-start gap-[2.6vw] max-[1025px]:flex-col max-[1025px]:gap-[5vw] max-md:gap-[6vw]">
             {/* Square image stack */}
@@ -231,7 +231,7 @@ export default function Stories() {
               <div className="relative mt-[1.4vw] max-md:mt-[5vw]">
                 {/* Spacer for heights */}
                 <div aria-hidden="true" className="invisible">
-                  <p className="text-24 leading-[1.4] text-black max-[1025px]:text-[2.4vw] max-md:text-[4vw]">
+                  <p className="text-24 leading-[1.4] text-black dark:text-slate-200 max-[1025px]:text-[2.4vw] max-md:text-[4vw]">
                     {STORIES[0].quote}
                   </p>
                   <p className="mt-[1.6vw] text-[1.55vw] max-[1025px]:text-[2.6vw] max-md:mt-[6vw] max-md:text-[4.4vw]">
@@ -255,13 +255,13 @@ export default function Stories() {
                       visibility: idx === 0 ? "visible" : "hidden",
                     }}
                   >
-                    <p className="text-24 leading-[1.4] text-black max-[1025px]:text-[2.4vw] max-md:text-[4vw]">
+                    <p className="text-24 leading-[1.4] text-black dark:text-slate-200 max-[1025px]:text-[2.4vw] max-md:text-[4vw]">
                       {s.quote}
                     </p>
-                    <p className="mt-[1.6vw] text-[1.55vw] text-[#2D8B8B] font-bold max-[1025px]:text-[4vw] max-md:mt-[6vw] max-md:text-[5vw]">
+                    <p className="mt-[1.6vw] text-[1.55vw] text-[#2D8B8B] dark:text-[#34D399] font-bold max-[1025px]:text-[4vw] max-md:mt-[6vw] max-md:text-[5vw]">
                       {s.name}
                     </p>
-                    <p className="mt-[0.1vw] text-22 text-black max-[1025px]:text-[2vw] max-md:text-[3.6vw]">
+                    <p className="mt-[0.1vw] text-22 text-black/70 dark:text-slate-400 max-[1025px]:text-[2vw] max-md:text-[3.6vw]">
                       {s.meta}
                     </p>
                   </div>

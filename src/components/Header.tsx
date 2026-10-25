@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import HoverText from "./ui/HoverText";
-import ApkDownloadModal from "./ApkDownloadModal";
+import ThemeToggle from "./ThemeToggle";
 import gsap from "gsap";
 
 export default function Header() {
@@ -149,18 +149,16 @@ export default function Header() {
             href="/"
           >
             <div className="flex items-center gap-2.5">
-              <div className="relative overflow-hidden rounded-xl bg-white p-1 shadow-md transition-transform duration-300 group-hover:scale-105">
-                <img
-                  alt="ScudoKid Logo"
-                  fetchPriority="high"
-                  loading="eager"
-                  width={44}
-                  height={44}
-                  decoding="async"
-                  className="h-[2.5vw] w-auto max-[1025px]:h-[6.5vw] max-md:h-[8.5vw] object-contain rounded-lg"
-                  src="/assets/media/scudokid-logo.jpg"
-                />
-              </div>
+              <img
+                alt="ScudoKid Logo"
+                fetchPriority="high"
+                loading="eager"
+                width={48}
+                height={48}
+                decoding="async"
+                className="h-[2.8vw] w-auto max-[1025px]:h-[7.2vw] max-md:h-[9.5vw] object-contain transition-transform duration-300 group-hover:scale-105"
+                src="/assets/media/scudokid-logo.png"
+              />
               <div className="flex flex-col">
                 <span className="font-heading text-[1.4vw] font-bold tracking-tight text-white max-[1025px]:text-[3.8vw] max-md:text-[4.8vw] leading-tight">
                   Scudo<span className="text-[#34D399]">Kid</span>
@@ -187,12 +185,16 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Desktop Dual CTA */}
+          {/* Desktop Dual CTA + Theme Toggle */}
           <div className="flex items-center gap-3 max-[1025px]:hidden">
+            <ThemeToggle variant="header" />
+
             <button
               type="button"
-              onClick={() => setApkModalOpen(true)}
-              className="flex items-center gap-2 rounded-full bg-[#2D8B8B] hover:bg-[#206E6E] px-4 py-2 text-sm font-bold text-white shadow-md transition-all active:scale-95"
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+              className="flex items-center gap-2 rounded-full bg-[#2D8B8B] hover:bg-[#206E6E] px-4 py-2 text-sm font-bold text-white shadow-md transition-all active:scale-95 cursor-pointer"
             >
               <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -207,9 +209,9 @@ export default function Header() {
               href="#cta"
               onClick={(e) => scrollToHash(e, "#cta")}
               showArrow
-              className="font-body text-18 tracking-tight text-black"
-              arrowClassName="text-black"
-              containerClassName="rounded-full bg-white px-4 py-2 text-black"
+              className="font-body text-18 tracking-tight text-black dark:text-white"
+              arrowClassName="text-black dark:text-white"
+              containerClassName="rounded-full bg-white dark:bg-[#102020] dark:border dark:border-emerald-500/30 px-4 py-2 text-black dark:text-white"
             />
           </div>
 
@@ -271,13 +273,18 @@ export default function Header() {
             </div>
 
             <div className="flex flex-col gap-3 pt-6 border-t border-white/15">
+              <div className="flex items-center justify-between pb-1">
+                <span className="text-sm font-semibold text-white/80">Theme Mode</span>
+                <ThemeToggle variant="header" />
+              </div>
+
               <button
                 type="button"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   setMenuOpen(false);
-                  setApkModalOpen(true);
                 }}
-                className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#2D8B8B] text-base font-bold text-white shadow-lg active:scale-95"
+                className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#2D8B8B] text-base font-bold text-white shadow-lg active:scale-95 cursor-pointer"
               >
                 <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -304,12 +311,6 @@ export default function Header() {
           </nav>
         </div>
       </header>
-
-      {/* APK Download Modal */}
-      <ApkDownloadModal
-        isOpen={apkModalOpen}
-        onClose={() => setApkModalOpen(false)}
-      />
     </>
   );
 }

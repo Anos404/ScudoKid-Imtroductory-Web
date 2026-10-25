@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ApkDownloadModal from "./ApkDownloadModal";
 
 interface ComparisonRow {
   capability: string;
@@ -91,7 +90,6 @@ const COMPARISON_DATA: ComparisonRow[] = [
 ];
 
 export default function Comparison() {
-  const [apkModalOpen, setApkModalOpen] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -121,8 +119,8 @@ export default function Comparison() {
   const renderBadge = (val: boolean | "partial") => {
     if (val === true) {
       return (
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold shadow-sm">
-          <svg className="size-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-xs font-bold shadow-sm">
+          <svg className="size-3.5 text-emerald-600 dark:text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="20 6 9 17 4 12" />
           </svg>
           Included
@@ -131,15 +129,15 @@ export default function Comparison() {
     }
     if (val === "partial") {
       return (
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-xs font-semibold">
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30 text-xs font-semibold">
           <span className="size-1.5 rounded-full bg-amber-500" />
           Partial
         </span>
       );
     }
     return (
-      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-50 text-rose-600 border border-rose-100 text-xs font-medium">
-        <svg className="size-3 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-300 border border-rose-100 dark:border-rose-900/30 text-xs font-medium">
+        <svg className="size-3 text-rose-500 dark:text-rose-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <line x1="18" y1="6" x2="6" y2="18" />
           <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
@@ -150,21 +148,21 @@ export default function Comparison() {
 
   return (
     <>
-      <section id="comparison" className="w-full bg-[#F7FAF9] py-20 px-[5%] max-md:py-14 border-y border-[#DCE6E4]">
+      <section id="comparison" className="w-full bg-[#F7FAF9] dark:bg-[#071111] py-20 px-[5%] max-md:py-14 border-y border-[#DCE6E4] dark:border-emerald-950/40 transition-colors duration-500">
         <div className="mx-auto max-w-400">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div className="max-w-2xl">
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#E2F3F1] border border-[#2D8B8B]/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#1A4F4F]">
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#E2F3F1] dark:bg-emerald-950/60 border border-[#2D8B8B]/30 dark:border-emerald-500/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#1A4F4F] dark:text-emerald-300">
                 Competitive Analysis
               </span>
               <h2
                 ref={headingRef}
-                className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-4 leading-tight tracking-tight"
+                className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mt-4 leading-tight tracking-tight"
               >
                 Why ScudoKid Outperforms Legacy Parental Controls
               </h2>
-              <p className="text-gray-600 text-base sm:text-lg mt-3 leading-relaxed">
+              <p className="text-gray-600 dark:text-slate-300 text-base sm:text-lg mt-3 leading-relaxed">
                 Traditional solutions rely on harsh lockouts and blind surveillance that breed resentment. ScudoKid introduces proactive AI telemetry, non-punitive habits, and positive reinforcement.
               </p>
             </div>
@@ -172,14 +170,16 @@ export default function Comparison() {
             <div className="flex flex-wrap items-center gap-3 shrink-0">
               <Link
                 href="/compare"
-                className="inline-flex items-center gap-2 rounded-full bg-white hover:bg-gray-50 border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-800 shadow-sm transition-all"
+                className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-[#0E1A1A] hover:bg-gray-50 dark:hover:bg-[#132323] border border-gray-300 dark:border-white/15 px-5 py-2.5 text-sm font-semibold text-gray-800 dark:text-white shadow-sm transition-all"
               >
                 Full Matrix Breakdown →
               </Link>
               <button
                 type="button"
-                onClick={() => setApkModalOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full bg-[#2D8B8B] hover:bg-[#206E6E] px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all active:scale-95"
+                onClick={(e) => {
+                  e.preventDefault();
+                }}
+                className="inline-flex items-center gap-2 rounded-full bg-[#2D8B8B] hover:bg-[#206E6E] px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all active:scale-95 cursor-pointer"
               >
                 Download Child APK
               </button>
@@ -189,55 +189,55 @@ export default function Comparison() {
           {/* Responsive Comparison Table Container */}
           <div
             ref={containerRef}
-            className="overflow-x-auto rounded-3xl bg-white border border-[#DCE6E4] shadow-card"
+            className="overflow-x-auto rounded-3xl bg-white dark:bg-[#0C1515] border border-[#DCE6E4] dark:border-emerald-500/20 shadow-card"
           >
             <table className="w-full text-left border-collapse min-w-[760px]">
               <thead>
-                <tr className="border-b border-[#DCE6E4] bg-gray-50/80">
-                  <th className="py-5 px-6 text-xs font-bold uppercase tracking-wider text-gray-500 w-[38%]">
+                <tr className="border-b border-[#DCE6E4] dark:border-emerald-500/20 bg-gray-50/80 dark:bg-[#081010]/90">
+                  <th className="py-5 px-6 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 w-[38%]">
                     Safety &amp; AI Capability
                   </th>
-                  <th className="py-5 px-4 text-center bg-[#E2F3F1]/70 border-x border-[#2D8B8B]/20 w-[22%]">
+                  <th className="py-5 px-4 text-center bg-[#E2F3F1]/70 dark:bg-[#0E2827]/90 border-x border-[#2D8B8B]/20 dark:border-emerald-500/30 w-[22%]">
                     <div className="flex items-center justify-center gap-2">
                       <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-                      <span className="font-heading text-base font-bold text-[#1A4F4F]">
+                      <span className="font-heading text-base font-bold text-[#1A4F4F] dark:text-emerald-300">
                         ScudoKid
                       </span>
                     </div>
-                    <span className="text-[10px] text-[#206E6E] font-medium block mt-0.5">
+                    <span className="text-[10px] text-[#206E6E] dark:text-emerald-400 font-medium block mt-0.5">
                       Proactive AI Ecosystem
                     </span>
                   </th>
-                  <th className="py-5 px-4 text-center text-xs font-semibold text-gray-600 w-[13%]">
+                  <th className="py-5 px-4 text-center text-xs font-semibold text-gray-600 dark:text-slate-300 w-[13%]">
                     Google Family Link
                   </th>
-                  <th className="py-5 px-4 text-center text-xs font-semibold text-gray-600 w-[13%]">
+                  <th className="py-5 px-4 text-center text-xs font-semibold text-gray-600 dark:text-slate-300 w-[13%]">
                     Qustodio
                   </th>
-                  <th className="py-5 px-4 text-center text-xs font-semibold text-gray-600 w-[14%]">
+                  <th className="py-5 px-4 text-center text-xs font-semibold text-gray-600 dark:text-slate-300 w-[14%]">
                     Bark
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#DCE6E4]">
+              <tbody className="divide-y divide-[#DCE6E4] dark:divide-white/10">
                 {COMPARISON_DATA.map((row, idx) => (
                   <tr
                     key={row.capability}
-                    className={`transition-colors hover:bg-gray-50/50 ${
-                      idx % 2 === 0 ? "bg-white" : "bg-gray-50/30"
+                    className={`transition-colors hover:bg-gray-50/50 dark:hover:bg-white/5 ${
+                      idx % 2 === 0 ? "bg-white dark:bg-[#0C1515]" : "bg-gray-50/30 dark:bg-[#081010]/40"
                     }`}
                   >
                     <td className="py-4 px-6 align-top">
-                      <p className="font-semibold text-gray-900 text-sm">
+                      <p className="font-semibold text-gray-900 dark:text-white text-sm">
                         {row.capability}
                       </p>
-                      <p className="text-xs text-gray-500 mt-1 leading-snug">
+                      <p className="text-xs text-gray-500 dark:text-slate-400 mt-1 leading-snug">
                         {row.scudo.detail}
                       </p>
                     </td>
 
                     {/* ScudoKid Column */}
-                    <td className="py-4 px-4 text-center align-middle bg-[#E2F3F1]/40 border-x border-[#2D8B8B]/20">
+                    <td className="py-4 px-4 text-center align-middle bg-[#E2F3F1]/40 dark:bg-[#0E2827]/50 border-x border-[#2D8B8B]/20 dark:border-emerald-500/30">
                       {renderBadge(row.scudo.supported)}
                     </td>
 
@@ -263,50 +263,44 @@ export default function Comparison() {
 
           {/* Quick Pillar Highlights */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
-            <div className="rounded-2xl bg-white p-6 border border-[#DCE6E4] shadow-sm">
-              <div className="flex size-10 items-center justify-center rounded-xl bg-[#E2F3F1] text-[#2D8B8B] mb-4">
+            <div className="rounded-2xl bg-white dark:bg-[#0C1515] p-6 border border-[#DCE6E4] dark:border-emerald-500/20 shadow-sm transition-colors duration-500">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-[#E2F3F1] dark:bg-[#122A2A] text-[#2D8B8B] dark:text-[#34D399] mb-4">
                 <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                 </svg>
               </div>
-              <h3 className="font-heading font-bold text-base text-gray-900">Democratized &amp; Accessible</h3>
-              <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">
+              <h3 className="font-heading font-bold text-base text-gray-900 dark:text-white">Democratized &amp; Accessible</h3>
+              <p className="text-xs text-gray-600 dark:text-slate-300 mt-1.5 leading-relaxed">
                 While commercial platforms charge upwards of $100/yr, ScudoKid is engineered specifically for developing regions and emerging families (UN SDGs 3, 4, 10, 16).
               </p>
             </div>
 
-            <div className="rounded-2xl bg-white p-6 border border-[#DCE6E4] shadow-sm">
-              <div className="flex size-10 items-center justify-center rounded-xl bg-[#E2F3F1] text-[#2D8B8B] mb-4">
+            <div className="rounded-2xl bg-white dark:bg-[#0C1515] p-6 border border-[#DCE6E4] dark:border-emerald-500/20 shadow-sm transition-colors duration-500">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-[#E2F3F1] dark:bg-[#122A2A] text-[#2D8B8B] dark:text-[#34D399] mb-4">
                 <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 6 6 18M6 6l12 12" />
                 </svg>
               </div>
-              <h3 className="font-heading font-bold text-base text-gray-900">Zero Alert Fatigue</h3>
-              <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">
+              <h3 className="font-heading font-bold text-base text-gray-900 dark:text-white">Zero Alert Fatigue</h3>
+              <p className="text-xs text-gray-600 dark:text-slate-300 mt-1.5 leading-relaxed">
                 Smart 3-tier classification (Informational, Warning, Critical) prevents parents from being overwhelmed by harmless notifications, keeping attention on real threats.
               </p>
             </div>
 
-            <div className="rounded-2xl bg-white p-6 border border-[#DCE6E4] shadow-sm">
-              <div className="flex size-10 items-center justify-center rounded-xl bg-[#E2F3F1] text-[#2D8B8B] mb-4">
+            <div className="rounded-2xl bg-white dark:bg-[#0C1515] p-6 border border-[#DCE6E4] dark:border-emerald-500/20 shadow-sm transition-colors duration-500">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-[#E2F3F1] dark:bg-[#122A2A] text-[#2D8B8B] dark:text-[#34D399] mb-4">
                 <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                 </svg>
               </div>
-              <h3 className="font-heading font-bold text-base text-gray-900">Positive Reinforcement</h3>
-              <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">
+              <h3 className="font-heading font-bold text-base text-gray-900 dark:text-white">Positive Reinforcement</h3>
+              <p className="text-xs text-gray-600 dark:text-slate-300 mt-1.5 leading-relaxed">
                 Rather than punishing kids with cold blockouts, ScudoKid unlocks rewards like Flappy Bird and Tic-Tac-Toe mini-games when children maintain healthy digital habits.
               </p>
             </div>
           </div>
         </div>
       </section>
-
-      {/* APK Modal */}
-      <ApkDownloadModal
-        isOpen={apkModalOpen}
-        onClose={() => setApkModalOpen(false)}
-      />
     </>
   );
 }

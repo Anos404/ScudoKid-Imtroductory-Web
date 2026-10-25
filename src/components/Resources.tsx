@@ -110,19 +110,19 @@ export default function Resources() {
   return (
     <section
       id="resources"
-      className="relative w-full overflow-hidden bg-white py-[7%] text-black max-[1025px]:py-[10%]"
+      className="relative w-full overflow-hidden bg-white dark:bg-[#070F0F] py-[7%] text-black dark:text-white max-[1025px]:py-[10%] transition-colors duration-500"
     >
       <div className="px-[5%] max-[1025px]:px-[7%]">
         <h2
           ref={headingRef}
-          className="font-heading w-[55vw] text-[3.8vw] leading-[1.1] font-normal tracking-[-0.02em] max-[1025px]:w-full max-[1025px]:text-[6vw] max-md:text-[9vw] opacity-0"
+          className="font-heading w-[55vw] text-[3.8vw] leading-[1.1] font-normal tracking-[-0.02em] max-[1025px]:w-full max-[1025px]:text-[6vw] max-md:text-[9vw] text-black dark:text-white opacity-0"
         >
           Research, Papers &amp; Engineering Insights
         </h2>
 
         <p
           ref={paragraphRef}
-          className="text-24 mt-[1.6vw] max-w-[34vw] leading-[1.6] text-black max-[1025px]:mt-[3vw] max-[1025px]:max-w-full max-[1025px]:text-[2.6vw] max-md:text-[4vw] opacity-0"
+          className="text-24 mt-[1.6vw] max-w-[34vw] leading-[1.6] text-black/80 dark:text-slate-300 max-[1025px]:mt-[3vw] max-[1025px]:max-w-full max-[1025px]:text-[2.6vw] max-md:text-[4vw] opacity-0"
         >
           Scientific and architectural publications authored for the ScudoKid child safety ecosystem.
         </p>

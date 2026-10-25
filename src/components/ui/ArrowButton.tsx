@@ -51,10 +51,10 @@ export default function ArrowButton({
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`group relative inline-flex size-[3.2vw] min-h-11 min-w-11 items-center justify-center overflow-hidden rounded-full border transition-opacity duration-300 select-none max-[1025px]:size-18 max-md:size-12 ${
+      className={`group relative inline-flex size-[3.2vw] min-h-11 min-w-11 items-center justify-center overflow-hidden rounded-full border transition-all duration-300 select-none max-[1025px]:size-18 max-md:size-12 ${
         disabled
-          ? "pointer-events-none cursor-default opacity-40 bg-white"
-          : "cursor-pointer"
+          ? "pointer-events-none cursor-default opacity-40 bg-white dark:bg-[#070F0F]"
+          : "cursor-pointer bg-white dark:bg-[#0D1818]"
       } ${className}`}
       style={{ borderColor: "#2D8B8B" }}
     >

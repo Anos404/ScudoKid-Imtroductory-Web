@@ -1,13 +1,11 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import StoreButton from "./ui/StoreButton";
-import ApkDownloadModal from "./ApkDownloadModal";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function Hero() {
-  const [apkModalOpen, setApkModalOpen] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const gradientRef = useRef<HTMLDivElement>(null);
   const mockupRef = useRef<HTMLDivElement>(null);
@@ -88,7 +86,7 @@ export default function Hero() {
     <>
       <section
         ref={sectionRef}
-        className="kyntra-hero relative min-h-screen h-full w-full bg-white overflow-hidden"
+        className="kyntra-hero relative min-h-screen h-full w-full bg-white dark:bg-[#070F0F] overflow-hidden transition-colors duration-500"
       >
         {/* Background gradient & giant logo watermark */}
         <div className="pointer-events-none absolute inset-0">
@@ -98,7 +96,7 @@ export default function Hero() {
             className="absolute inset-x-0 top-0 h-[115vh] max-[1025px]:h-[105vh] opacity-0"
             style={{ willChange: "opacity" }}
           >
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,#000000_0%,#000000_18%,#081C1B_32%,#0F3836_46%,#164E4D_60%,#206E6E_72%,#2D8B8B_84%,#E2F3F1_94%,#ffffff_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,#000000_0%,#000000_18%,#081C1B_32%,#0F3836_46%,#164E4D_60%,#206E6E_72%,#2D8B8B_84%,#E2F3F1_94%,#ffffff_100%)] dark:bg-[linear-gradient(180deg,#000000_0%,#000000_20%,#051515_36%,#0A2929_52%,#0F3E3D_68%,#144D4C_82%,#070F0F_100%)]" />
           </div>
           <img
             alt="ScudoKid"
@@ -140,7 +138,7 @@ export default function Hero() {
           <div className="flex w-[60%] flex-col gap-[3vw] pt-[26vh] max-[1025px]:w-full max-[1025px]:gap-[5vw] max-[1025px]:pt-0 max-[1025px]:text-left max-md:gap-5">
             <h1
               ref={headingRef}
-              className="font-heading max-[1025px]:leading-[1.2] text-black max-[1025px]:mx-0 max-[1025px]:text-white max-md:max-w-none opacity-0"
+              className="font-heading max-[1025px]:leading-[1.2] text-white max-[1025px]:mx-0 max-md:max-w-none opacity-0"
             >
               AI Protection for
               <br />
@@ -149,7 +147,7 @@ export default function Hero() {
 
             <p
               ref={paragraphRef}
-              className="w-[30vw] text-22 leading-[1.6] max-[1025px]:leading-[1.7] tracking-wide text-black max-[1025px]:mx-0 max-[1025px]:w-full max-[1025px]:max-w-[85%] max-[1025px]:text-white max-md:max-w-none opacity-0"
+              className="w-[30vw] text-22 leading-[1.6] max-[1025px]:leading-[1.7] tracking-wide text-white/90 dark:text-slate-200 max-[1025px]:mx-0 max-[1025px]:w-full max-[1025px]:max-w-[85%] max-md:max-w-none opacity-0"
             >
               ScudoKid is an introductory child safety ecosystem featuring a real-time Android Child Mobile App, proactive AI risk scoring, and a complete Parent Web Portal.
             </p>
@@ -163,7 +161,6 @@ export default function Hero() {
                     href="#download-apk"
                     onClick={(e) => {
                       e.preventDefault();
-                      setApkModalOpen(true);
                     }}
                   />
                 </div>
@@ -179,24 +176,18 @@ export default function Hero() {
 
               <div
                 ref={ratingRef}
-                className="flex items-center gap-2 text-20 text-black max-[1025px]:justify-start max-[1025px]:text-white opacity-0"
+                className="flex items-center gap-2 text-20 text-white/90 dark:text-slate-300 max-[1025px]:justify-start opacity-0"
               >
                 <span className="text-[#10B981] font-semibold">4.9 ★ </span>
-                <span className="text-20 text-black max-[1025px]:text-white">
+                <span className="text-20 text-white/90 dark:text-slate-300">
                   AI-Driven Child Safety &amp; Monitoring ·{" "}
-                  <span className="font-semibold text-black max-[1025px]:text-white">Next-Gen Family Protection</span> · 2026
+                  <span className="font-semibold text-white">Next-Gen Family Protection</span> · 2026
                 </span>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Interactive APK Download Modal */}
-      <ApkDownloadModal
-        isOpen={apkModalOpen}
-        onClose={() => setApkModalOpen(false)}
-      />
     </>
   );
 }
